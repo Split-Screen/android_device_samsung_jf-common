@@ -23,6 +23,11 @@
 # inherit from qcom-common
 -include device/samsung/qcom-common/BoardConfigCommon.mk
 
+# Dex-preoptimization
+ifeq ($(HOST_OS),linux)
+    WITH_DEXPREOPT := true
+endif
+
 # Platform
 TARGET_BOARD_PLATFORM := msm8960
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
