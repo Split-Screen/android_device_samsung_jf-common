@@ -54,6 +54,13 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
+# Custom format
+ifeq ($(TARGET_CUSTOM_SYSTEM_FORMAT),true)
+PRODUCT_COPY_FILES += \
+    device/samsung/jf-common/configs/format.sh:install/bin/format.sh \
+    device/samsung/jf-common/rootdir/etc/fstab.f2fs:root/fstab.qcom
+endif
+
 # System Properties
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp

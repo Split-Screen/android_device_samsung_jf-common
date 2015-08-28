@@ -102,8 +102,10 @@ TARGET_USES_LOGD := false
 BOARD_NFC_HAL_SUFFIX := msm8960
 
 # Partitions
+BLOCK_BASED_OTA := false
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+TARGET_CUSTOM_SYSTEM_FORMAT := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00A00000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1181114368
@@ -120,7 +122,11 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
-TARGET_RECOVERY_FSTAB := device/samsung/jf-common/rootdir/etc/fstab.qcom
+ifeq ($(TARGET_CUSTOM_SYSTEM_FORMAT),true)
+    TARGET_RECOVERY_FSTAB := device/samsung/jf-common/rootdir/etc/fstab.f2fs
+else
+    TARGET_RECOVERY_FSTAB := device/samsung/jf-common/rootdir/etc/fstab.qcom
+endif
 
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/jf-common/ril
